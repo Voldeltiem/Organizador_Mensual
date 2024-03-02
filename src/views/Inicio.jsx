@@ -1,7 +1,13 @@
 import React from 'react'
+import Login from '../components/Login'
+import Registro from "../components/Registro"
 
 export default function Inicio() {
   return (
-    <div>Inicio</div>
+    <div>
+        Pagina de incio
+        <Login/>
+        <Registro/>
+    </div>
   )
 }
