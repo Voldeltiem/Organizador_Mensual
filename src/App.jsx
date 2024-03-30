@@ -5,6 +5,8 @@ import Contexto from "./contex/contexto";
 import Validacion from "./Utilities/Validacion";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Perfil from "./views/Perfil";
+import Despensa from "./views/Despensa";
+import Lista_de_compras from "./views/Lista_de_compras";
 
 // Componente principal de la aplicación
 function App() {
@@ -26,9 +28,11 @@ function App() {
             <Route path="/" element={<Inicio />} />
 
             {/* Ruta con Validacion que decide entre Inicio y Perfil basándose en la autenticación */}
-            <Route path="/" element={<Validacion />}>
+            <Route path="/" element={<Validacion/>}>
               {/* Ruta secundaria para el perfil, renderiza el componente Perfil */}
               <Route path="/perfil" element={<Perfil />} />
+              <Route path="/despensa" element={<Despensa />} />
+              <Route path="/listaDeCompras" element={<Lista_de_compras />} />
             </Route>
           </Routes>
         </BrowserRouter>

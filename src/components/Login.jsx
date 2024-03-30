@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // Define y exporta el componente funcional Login
 export default function Login() {
   // Estados locales para almacenar el usuario, la contraseña y el estado de inicio de sesión
-  const [usuario, setUsuario] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginSuccessful, setLoginSuccessful] = useState(false);
 
@@ -16,32 +16,22 @@ export default function Login() {
   // useNavigate se utiliza para obtener la función de navegación del enrutador
   const navigate = useNavigate();
 
-  // Función para decodificar el token JWT
-  function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
-  }
-
   // Función para manejar el envío del formulario
   const handleUsuario = async (e) => {
     e.preventDefault();
 
     // Objeto de datos a enviar al servidor
     const data = {
-      username: usuario,
+      email: email,
       password: password
     };
 
     try {
       // Petición de inicio de sesión al servidor usando axios
       const respuesta = await axios.post(`${urlApi}/login`, data);
-      console.log(respuesta.data);
 
       // Obtener el token del servidor y decodificarlo
       const token = respuesta.data.token;
-      console.log(token);
-      console.log(parseJwt(token));
 
       // Verificar si la respuesta del servidor es exitosa
       if (respuesta.data) {
@@ -66,12 +56,12 @@ export default function Login() {
     <div className='caja'>
       Login
       <form>
-        {/* Input para el nombre de usuario */}
+        {/* Input para el email de usuario */}
         <input
-          value={usuario}
+          value={email}
           onChange={(e) => {
-            setUsuario(e.target.value);
-          }} type="text" placeholder='Usuario' />
+            setEmail(e.target.value);
+          }} type="email" placeholder='email' />
         {/* Input para la contraseña */}
         <input
           value={password}
